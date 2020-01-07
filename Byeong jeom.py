@@ -1,37 +1,41 @@
 #url 불러오기
-import api1_ys
 import requests
-import project_vol1
 
-url="http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey=aT2lgQ3eq4GY4xrspJsvGHjXdJVHZxbGfq5dExmviAtuG9U7rZvEJA7U8BfYg30j%2BZP7wnKAE7XkTSFjOq9EZw%3D%3D&stationId=233000702"
+def get_url():
+    url=api.yesol_api
 
-response=requests.get(url)
+    response=requests.get(url)
 
-data=response.text
+    data=response.text
 
-import xml.etree.ElementTree as ET
+    root=ET.fromstring(data)
 
-root=ET.fromstring(data)
+    return root
+
+
 #정보추출해서 카테코리별로 정리
-loNo1=[]
-loNo2=[]
-predic_time=[]
-route_id=[]
-plate_no=[]
-for locationNo1 in root.iter("locationNo1") :
-    loNo1.append(locationNo1.text)
+def get_information(root):
+    loNo1=[]
+    loNo2=[]
+    predic_time=[]
+    route_id=[]
+    plate_no=[]
+    for locationNo1 in root.iter("locationNo1") :
+        loNo1.append(locationNo1.text)
 
-for locationNo2 in root.iter("locationNo2") :
-    loNo2.append(locationNo2.text)
+    for locationNo2 in root.iter("locationNo2") :
+        loNo2.append(locationNo2.text)
 
-for predictTime1 in root.iter("predictTime1") :
-    predic_time.append(predictTime1.text)
+    for predictTime1 in root.iter("predictTime1") :
+        predic_time.append(predictTime1.text)
 
-for routeId in root.iter("routeId") :
-    route_id.append(routeId.text)
+    for routeId in root.iter("routeId") :
+        route_id.append(routeId.text)
 
-for plateNo1 in root.iter("plateNo1") :
-    plate_no.append(plateNo1.text)
+    for plateNo1 in root.iter("plateNo1") :
+        plate_no.append(plateNo1.text)
+    
+    return loNo1,loNo2,predic_time,route_id,plate_no
 #내가탄 버스의 병점역 도착예정시간
 bus_701=[]
 bus_73=[]
@@ -61,5 +65,4 @@ try:
 except IndexError :
     bus_73_1_data={'차량번호':"?"}
 
-if project_vol1.fastbus_time['버스번호']==701:
-    pass
+
