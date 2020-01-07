@@ -1,0 +1,17 @@
+bus_701_data,bus_73_data,bus_73_1_data,bus_701_2data,bus_73_2data,bus_73_1_2data=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,loNo2,predic_time2,plate_no2)
+yesol_output=yesol_output(bus_701_data,bus_73_data,bus_73_1_data)
+
+def bus_arrive_time(ys_bus_data,bus_701_data,bus_73_data,bus_73_1_data,bus_701_2data,bus_73_2data,bus_73_1_2data):
+    if ys_bus_data['차량번호']==bus_701_data['차량번호']:
+        mybus=bus_701_data['도착예정시간']
+    elif ys_bus_data['차량번호']==bus_701_2data['차량번호']
+        mybus=bus_701_2data['도착예정시간']
+    elif ys_bus_data['차량번호']==bus_73_data['차량번호']
+        mybus=bus_73_data['도착예정시간']
+    elif ys_bus_data['차량번호']==bus_73_2data['차량번호']
+        mybus=bus_73_2data['도착예정시간']
+    elif ys_bus_data['차량번호']==bus_73_1_data['차량번호']
+        mybus=bus_73_1_data['도착예정시간']
+    elif ys_bus_data['차량번호']==bus_73_1_2data['차량번호']
+        mybus=bus_73_1_2data['도착예정시간']
+    return mybus
