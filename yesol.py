@@ -45,96 +45,87 @@ def get_information(root):
     return loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2
 #701 상행하행구분:카카오버스로 실제 버스와비교결과 뒤에있는 701번이 병점역행
 #필요한 노선별 index값 찾기
-def bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2):
-    bus_701=[]
-    bus_73=[]
-    bus_73_1=[]
-    for i,name in enumerate(route_id):
-        if name=='223000032':
-            bus_701.append(i)
+#class화
+class bus_data():
+    def __init__(self,route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2):
+        self.route_id=route_id
+        self.loNo1=loNo1
+        self.loNo2=loNo2
+        self.predic_time=predic_time
+        self.predic_time2=predic_time2
+        self.plate_no=plate_no
+        self.plate_no2=plate_no2
+    def setdata(self,route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2):
+        self.route_id=route_id
+        self.loNo1=loNo1
+        self.loNo2=loNo2
+        self.predic_time=predic_time
+        self.predic_time2=predic_time2
+        self.plate_no=plate_no
+        self.plate_no2=plate_no2
+    def data_701_ys(self):
+        bus_701=[]
+        for i,name in enumerate(self.route_id):
+            if name=='223000032':
+                bus_701.append(i)
+        
+        try:
+            bus_701_data={'남은정류장':self.loNo1[bus_701[1]],'도착예정시간':self.predic_time[bus_701[1]],'버스번호':'701','차량번호':self.plate_no[bus_701[1]]}
+        except IndexError :
+            bus_701_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
+        try:
+            bus_701_2data={'남은정류장':self.loNo2[bus_701[1]],'도착예정시간':self.predic_time2[bus_701[1]],'버스번호':'701','차량번호':self.plate_no2[bus_701[1]]}
+        except IndexError :
+            bus_701_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
+        return bus_701_data,bus_701_2data
     
-    for i,name in enumerate(route_id):
-        if name=='223000058':
-            bus_73.append(i)
-
-    for i,name in enumerate(route_id):
-        if name=='233000130':
-            bus_73_1.append(i)
-
-    try:
-        bus_701_data={'남은정류장':loNo1[bus_701[1]],'도착예정시간':predic_time[bus_701[1]],'버스번호':'701','차량번호':plate_no[bus_701[1]]}
-    except IndexError :
-        bus_701_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
-    try:
-        bus_73_data={'남은정류장':loNo1[bus_73[0]],'도착예정시간':predic_time[bus_73[0]],'버스번호':'73','차량번호':plate_no[bus_73[0]]}
-    except IndexError :
-        bus_73_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
-    try:
-        bus_73_1_data={'남은정류장':loNo1[bus_73_1[0]],'도착예정시간':predic_time[bus_73_1[0]],'버스번호':'73-1','차량번호':plate_no[bus_73_1[0]]}
-    except IndexError :
-        bus_73_1_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
-    try:
-        bus_701_2data={'남은정류장':loNo2[bus_701[1]],'도착예정시간':predic_time2[bus_701[1]],'버스번호':'701','차량번호':plate_no2[bus_701[1]]}
-    except IndexError :
-        bus_701_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
-    try:
-        bus_73_2data={'남은정류장':loNo2[bus_73[0]],'도착예정시간':predic_time2[bus_73[0]],'버스번호':'73','차량번호':plate_no2[bus_73[0]]}
-    except IndexError :
-        bus_73_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
-    try:
-        bus_73_1_2data={'남은정류장':loNo2[bus_73_1[0]],'도착예정시간':predic_time2[bus_73_1[0]],'버스번호':'701','차량번호':plate_no2[bus_73_1[0]]}
-    except IndexError :
-        bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
-    return bus_701_data,bus_73_data,bus_73_1_data,bus_701_2data,bus_73_2data,bus_73_1_2data
-
-
-def bus_data_bj(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2):
-    bus_701=[]
-    bus_73=[]
-    bus_73_1=[]
-    for i,name in enumerate(route_id):
-        if name=='223000032':
-            bus_701.append(i)
+    def data_701(self):
+        bus_701=[]
+        for i,name in enumerate(self.route_id):
+            if name=='223000032':
+                bus_701.append(i)
+        
+        try:
+            bus_701_data={'남은정류장':self.loNo1[bus_701[0]],'도착예정시간':self.predic_time[bus_701[0]],'버스번호':'701','차량번호':self.plate_no[bus_701[0]]}
+        except IndexError :
+            bus_701_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
+        try:
+            bus_701_2data={'남은정류장':self.loNo2[bus_701[0]],'도착예정시간':self.predic_time2[bus_701[0]],'버스번호':'701','차량번호':self.plate_no2[bus_701[0]]}
+        except IndexError :
+            bus_701_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
+        return bus_701_data,bus_701_2data
+        
+    def data_73(self):
+        bus_73=[]
+        for i,name in enumerate(self.route_id):
+            if name=='223000058':
+                bus_73.append(i)
+        
+        try:
+            bus_73_data={'남은정류장':self.loNo1[bus_73[0]],'도착예정시간':self.predic_time[bus_73[0]],'버스번호':'73','차량번호':self.plate_no[bus_73[0]]}
+        except IndexError :
+            bus_73_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
+        try:
+            bus_73_2data={'남은정류장':self.loNo2[bus_73[0]],'도착예정시간':self.predic_time2[bus_73[0]],'버스번호':'73','차량번호':self.plate_no2[bus_73[0]]}
+        except IndexError :
+            bus_73_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
+        return bus_73_data,bus_73_2data
     
-    for i,name in enumerate(route_id):
-        if name=='223000058':
-            bus_73.append(i)
-
-    for i,name in enumerate(route_id):
-        if name=='233000130':
-            bus_73_1.append(i)
-
-    try:
-        bus_701_data={'남은정류장':loNo1[bus_701[0]],'도착예정시간':predic_time[bus_701[0]],'버스번호':'701','차량번호':plate_no[bus_701[0]]}
-    except IndexError :
-        bus_701_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
-    try:
-        bus_73_data={'남은정류장':loNo1[bus_73[0]],'도착예정시간':predic_time[bus_73[0]],'버스번호':'73','차량번호':plate_no[bus_73[0]]}
-    except IndexError :
-        bus_73_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
-    try:
-        bus_73_1_data={'남은정류장':loNo1[bus_73_1[0]],'도착예정시간':predic_time[bus_73_1[0]],'버스번호':'73-1','차량번호':plate_no[bus_73_1[0]]}
-    except IndexError :
-        bus_73_1_data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
-    try:
-        bus_701_2data={'남은정류장':loNo2[bus_701[0]],'도착예정시간':predic_time2[bus_701[0]],'버스번호':'701','차량번호':plate_no2[bus_701[0]]}
-    except IndexError :
-        bus_701_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'701'}
-    try:
-        bus_73_2data={'남은정류장':loNo2[bus_73[0]],'도착예정시간':predic_time2[bus_73[0]],'버스번호':'73','차량번호':plate_no2[bus_73[0]]}
-    except IndexError :
-        bus_73_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
-    try:
-        bus_73_1_2data={'남은정류장':loNo2[bus_73_1[0]],'도착예정시간':predic_time2[bus_73_1[0]],'버스번호':'701','차량번호':plate_no2[bus_73_1[0]]}
-    except IndexError :
-        bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
-    return bus_701_data,bus_73_data,bus_73_1_data,bus_701_2data,bus_73_2data,bus_73_1_2data
-
-
-
-
-
-
+    def data_73_1(self):
+        bus_73_1=[]
+        for i,name in enumerate(self.route_id):
+            if name=='223000058':
+                bus_73_1.append(i)
+        
+        try:
+            bus_73_1data={'남은정류장':self.loNo1[bus_73_1[0]],'도착예정시간':self.predic_time[bus_73_1[0]],'버스번호':'73','차량번호':self.plate_no[bus_73_1[0]]}
+        except IndexError :
+            bus_73_1data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
+        try:
+            bus_73_1_2data={'남은정류장':self.loNo2[bus_73_1[0]],'도착예정시간':self.predic_time2[bus_73_1[0]],'버스번호':'73','차량번호':self.plate_no2[bus_73_1[0]]}
+        except IndexError :
+            bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
+        return bus_73_1data,bus_73_1_2data
 
 def yesol_output(bus_701_data,bus_73_data,bus_73_1_data):
     bustime=[int(bus_701_data['도착예정시간']),int(bus_73_data['도착예정시간']),int(bus_73_1_data['도착예정시간'])]
@@ -163,4 +154,3 @@ def yesol_output(bus_701_data,bus_73_data,bus_73_1_data):
         print("남은정류장:{}개".format(fastbus_data['남은정류장']))
         return bus_73_1_data
 
-    
