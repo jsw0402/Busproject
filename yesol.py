@@ -126,7 +126,7 @@ class bus_data():
         except IndexError :
             bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
         return bus_73_1data,bus_73_1_2data
-
+#예솔초정류장에서의 결과물
 def yesol_output(bus_701_data,bus_73_data,bus_73_1_data):
     bustime=[int(bus_701_data['도착예정시간']),int(bus_73_data['도착예정시간']),int(bus_73_1_data['도착예정시간'])]
     fastbus_time=min(bustime)
