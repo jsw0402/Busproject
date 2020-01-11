@@ -27,7 +27,7 @@ class bjtime():
 
         return self.responseJson['result']['path'][bus_index]['subPath'][1]['sectionTime']
         
-    def hanlim_bj(self):
+    def yedang_bj(self):
         x=[]
         for i in range(0,len(self.responseJson['result']['path'])):
             x.append(self.responseJson['result']['path'][i]['subPath'][1]['lane'][0]['busNo'])

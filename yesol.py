@@ -115,17 +115,17 @@ class bus_data():
     def data_73_1(self):
         bus_73_1=[]
         for i,name in enumerate(self.route_id):
-            if name=='223000058':
+            if name=='233000130':
                 bus_73_1.append(i)
         
         try:
-            bus_73_1data={'남은정류장':self.loNo1[bus_73_1[0]],'도착예정시간':self.predic_time[bus_73_1[0]],'버스번호':'73','차량번호':self.plate_no[bus_73_1[0]]}
+            bus_73_1data={'남은정류장':self.loNo1[bus_73_1[0]],'도착예정시간':self.predic_time[bus_73_1[0]],'버스번호':'73-1','차량번호':self.plate_no[bus_73_1[0]]}
         except IndexError :
-            bus_73_1data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
+            bus_73_1data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
         try:
-            bus_73_1_2data={'남은정류장':self.loNo2[bus_73_1[0]],'도착예정시간':self.predic_time2[bus_73_1[0]],'버스번호':'73','차량번호':self.plate_no2[bus_73_1[0]]}
+            bus_73_1_2data={'남은정류장':self.loNo2[bus_73_1[0]],'도착예정시간':self.predic_time2[bus_73_1[0]],'버스번호':'73-1','차량번호':self.plate_no2[bus_73_1[0]]}
         except IndexError :
-            bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73'}
+            bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
         return bus_73_1data,bus_73_1_2data
 #예솔초정류장에서의 결과물
 def yesol_output(bus_701_data,bus_73_data,bus_73_1_data):
@@ -174,7 +174,7 @@ def middle_time(x):
 
 
     elif x['버스번호']=='73':
-        root=get_url(central)
+        root=get_url(ys_yedang)
         loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
         a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
         bus_73_data,bus_73_2data=a.data_73()
@@ -188,7 +188,7 @@ def middle_time(x):
             pass
 
     elif x['버스번호']=='73-1':
-        root=get_url(central)
+        root=get_url(ys_yedang)
         loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
         a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
         bus_73_1_data,bus_73_1_2data=a.data_73_1()

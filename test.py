@@ -1,6 +1,7 @@
 #예솔초에서 탈 버스 정보
 from yesol import *
 from _byeongjeom import *
+import time
 
 root=get_url(yesol_api)
 loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
@@ -16,7 +17,7 @@ if bus_number=='701':
     api=honbo_time
 
 elif bus_number=='73' or bus_number=='73-1':
-    api=hanlim
+    api=yedang
 
 responseJson=get_Json_data(api)
 
@@ -26,10 +27,17 @@ result=bjtime(responseJson)
 if api==honbo_time:
     x=result.dong_bj()
 elif api==hanlim:
-    x=result.hanlim_bj()
+    x=result.yedang_bj()
 
 yesol_bj_time=int(middle_time)+int(x)
-print(yesol_bj_time)
+
+
+x=time.localtime(time.time())
+arr_time=(x.tm_hour,x.tm_min+yesol_bj_time)
+
+if arr_time[1]>=60:
+    arr_time=(x.tm_hour+1,x.tm_min+yesol_bj_time-60)
+print(("병점역 도착예정시간은 {}시{}분입니다.").format(arr_time[0],arr_time[1]))
 
 
 
