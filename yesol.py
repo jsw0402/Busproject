@@ -127,6 +127,53 @@ class bus_data():
         except IndexError :
             bus_73_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'73-1'}
         return bus_73_1data,bus_73_1_2data
+    def data_34(self):
+        bus_34=[]
+        for i,name in enumerate(self.route_id):
+            if name=='233000011':
+                bus_34.append(i)
+        
+        try:
+            bus_34data={'남은정류장':self.loNo1[bus_34[0]],'도착예정시간':self.predic_time[bus_34[0]],'버스번호':'34','차량번호':self.plate_no[bus_34[0]]}
+        except IndexError :
+            bus_34data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'34'}
+        try:
+            bus_34_2data={'남은정류장':self.loNo2[bus_34[0]],'도착예정시간':self.predic_time2[bus_34[0]],'버스번호':'34','차량번호':self.plate_no2[bus_34[0]]}
+        except IndexError :
+            bus_34_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'34'}
+        return bus_34data,bus_34_2data
+    
+    def data_34_1(self):
+        bus_34_1=[]
+        for i,name in enumerate(self.route_id):
+            if name=='233000012':
+                bus_34_1.append(i)
+        
+        try:
+            bus_34_1data={'남은정류장':self.loNo1[bus_34_1[0]],'도착예정시간':self.predic_time[bus_34_1[0]],'버스번호':'34-1','차량번호':self.plate_no[bus_34_1[0]]}
+        except IndexError :
+            bus_34_1data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'34-1'}
+        try:
+            bus_34_1_2data={'남은정류장':self.loNo2[bus_34_1[0]],'도착예정시간':self.predic_time2[bus_34_1[0]],'버스번호':'34-1','차량번호':self.plate_no2[bus_34_1[0]]}
+        except IndexError :
+            bus_34_1_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'34-1'}
+        return bus_34_1data,bus_34_1_2data
+    
+    def data_46(self):
+        bus_46=[]
+        for i,name in enumerate(self.route_id):
+            if name=='200000106':
+                bus_46.append(i)
+        
+        try:
+            bus_46data={'남은정류장':self.loNo1[bus_46[0]],'도착예정시간':self.predic_time[bus_46[0]],'버스번호':'46','차량번호':self.plate_no[bus_46[0]]}
+        except IndexError :
+            bus_46data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'46'}
+        try:
+            bus_46_2data={'남은정류장':self.loNo2[bus_46[0]],'도착예정시간':self.predic_time2[bus_46[0]],'버스번호':'46','차량번호':self.plate_no2[bus_46[0]]}
+        except IndexError :
+            bus_46_2data={'남은정류장':9999,'도착예정시간':9999,'버스번호':'46'}
+        return bus_46data,bus_46_2data
 #예솔초정류장에서의 결과물
 def yesol_output(bus_701_data,bus_73_data,bus_73_1_data):
     bustime=[int(bus_701_data['도착예정시간']),int(bus_73_data['도착예정시간']),int(bus_73_1_data['도착예정시간'])]
@@ -189,6 +236,51 @@ def middle_time(x):
 
     elif x['버스번호']=='73-1':
         root=get_url(ys_yedang)
+        loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
+        a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
+        bus_73_1_data,bus_73_1_2data=a.data_73_1()
+        if bus_73_1_data['차량번호']==x['차량번호']:
+            return bus_73_1_data['도착예정시간'],'73-1'
+            
+        elif bus_73_1_2data['차량번호']==x['차량번호']:
+            return bus_73_1_2data['도착예정시간'],'73-1'
+            
+        else :
+            pass    
+
+def middle_time_home(x):
+    if x['버스번호']=='701':
+        root=get_url(bj_homeplus)
+        loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
+        a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
+        bus_701_data,bus_701_2data=a.data_701()
+        if bus_701_data['차량번호']==x['차량번호']:
+            return bus_701_data['도착예정시간'],'701'
+            
+        elif bus_701_2data['차량번호']==x['차량번호']:
+            return bus_701_2data['도착예정시간'],'701'
+    
+        else :
+            pass
+
+
+
+    elif x['버스번호']=='73':
+        root=get_url(bj_moa)
+        loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
+        a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
+        bus_73_data,bus_73_2data=a.data_73()
+        if bus_73_data['차량번호']==x['차량번호']:
+            return bus_73_data['도착예정시간'],'73'
+        
+        elif bus_73_2data['차량번호']==x['차량번호']:
+            return bus_73_2data['도착예정시간'],'73'
+            
+        else :
+            pass
+
+    elif x['버스번호']=='73-1':
+        root=get_url(bj_moa)
         loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
         a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
         bus_73_1_data,bus_73_1_2data=a.data_73_1()
