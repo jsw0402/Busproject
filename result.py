@@ -29,15 +29,19 @@ if x==1:
     responseJson=get_Json_data(api)
 
     result=bjtime(responseJson)
+    
 
 
     if api==honbo_time:
         x=result.dong_bj()
-    elif api==hanlim:
+    elif api==yedang:
         x=result.yedang_bj()
 
     #총걸리는시간
+    print(middle_time)
+    print(x)
     yesol_bj_time=int(middle_time)+int(x)
+    
 
     #도착예정시간
     x=time.localtime(time.time())
@@ -61,8 +65,8 @@ elif x==2:
     #병점역사거리정류장에 가장빨리오는 버스정보
     x=suwon_output(bus_34data,bus_34_1data,bus_46data)
     #병점역사거리에서부터 수원대까지 걸리는시간
-    arrive_time,bus_number=arrive_time(x)
-    suwon_bj_time=int(arrive_time)
+    bj_suwon_time,bus_number=arrive_time_bj_suwon(x)
+    suwon_bj_time=int(bj_suwon_time)
     #수원대 도착예정시간
     x=time.localtime(time.time())
     arr_time=(x.tm_hour,x.tm_min+suwon_bj_time)
@@ -106,22 +110,23 @@ elif x==4:
     x=yesol_output(bus_701_data,bus_73_data,bus_73_1_data)
     #중간정류장
     middle_time,bus_number=middle_time_home(x)
+    
     #중간정류장으로부터 집까지 시간 구하기
     if bus_number=='701':
         api=bj_homeplus_time
 
     elif bus_number=='73' or bus_number=='73-1':
         api=bj_moa_time
-
+        
     responseJson=get_Json_data(api)
 
     result=bjtime(responseJson)
 
 
     if api==bj_homeplus_time:
-        x=result.dong_bj()
+        x=result.bj_homeplus()
     elif api==bj_moa_time:
-        x=result.yedang_bj()
+        x=result.bj_moa()
     #집까지 걸리는 총시간
     yesol_bj_time=int(middle_time)+int(x)
 
@@ -131,4 +136,4 @@ elif x==4:
 
     if arr_time[1]>=60:
         arr_time=(x.tm_hour+1,x.tm_min+yesol_bj_time-60)
-    print(("잡 도착예정시간은 {}시{}분입니다.").format(arr_time[0],arr_time[1]))
+    print(("집 도착예정시간은 {}시{}분입니다.").format(arr_time[0],arr_time[1]))

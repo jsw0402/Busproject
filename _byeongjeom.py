@@ -21,7 +21,9 @@ class bjtime():
         x=[]
         for i in range(0,len(self.responseJson['result']['path'])):
             x.append(self.responseJson['result']['path'][i]['subPath'][1]['lane'][0]['busNo'])
+            print(x)
         for a in enumerate(x):
+            print(a)
             if a[1]=='701':
                 bus_index=a[0]
 
@@ -31,6 +33,7 @@ class bjtime():
         x=[]
         for i in range(0,len(self.responseJson['result']['path'])):
             x.append(self.responseJson['result']['path'][i]['subPath'][1]['lane'][0]['busNo'])
+            print(x)
         for a in enumerate(x):
             if a[1]=='73':
                 bus_index=a[0]
@@ -39,7 +42,30 @@ class bjtime():
 
         return self.responseJson['result']['path'][bus_index]['subPath'][1]['sectionTime']
         
+    def bj_homeplus(self):
+        x=[]
+        for i in range(0,4):
+            x.append(self.responseJson['result']['path'][i]['subPath'][1]['lane'][0]['busNo'])
+        for a in enumerate(x):
+            print(a)
+            if a[1]=='701':
+                bus_index=a[0]
 
+        return self.responseJson['result']['path'][bus_index]['subPath'][1]['sectionTime']
 
+    def bj_moa(self):
+        num=[0,1,2,3,5,6,7,8,9]
+        x=[]
+        for i in num:
+            print(self.responseJson['result']['path'][i]['subPath'][1]['lane'][0]['busNo'])
+            
+            
+        for a in enumerate(x):
+            if a[1]=='73':
+                bus_index=a[0]
+            elif a[1]=='73-1':
+                bus_index=a[0]
+
+        return self.responseJson['result']['path'][bus_index]['subPath'][1]['sectionTime']
 
 

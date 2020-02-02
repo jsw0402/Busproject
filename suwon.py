@@ -72,7 +72,48 @@ def arrive_time(x):
         else :
             pass
 
+def arrive_time_bj_suwon(x):
+    if x['버스번호']=='34':
+        root=get_url(bj_suwon)
+        loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
+        a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
+        bus_34data,bus_34_2data=a.data_34()
+        if bus_34data['차량번호']==x['차량번호']:
+            return bus_34data['도착예정시간'],'34'
+            
+        elif bus_34_2data['차량번호']==x['차량번호']:
+            return bus_34_2data['도착예정시간'],'34'
+    
+        else :
+            pass
+    
+    elif x['버스번호']=='34-1':
+        root=get_url(bj_suwon)
+        loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
+        a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
+        bus_34_1data,bus_34_1_2data=a.data_34_1()
+        if bus_34_1data['차량번호']==x['차량번호']:
+            return bus_34_1data['도착예정시간'],'34-1'
+            
+        elif bus_34_1_2data['차량번호']==x['차량번호']:
+            return bus_34_1_2data['도착예정시간'],'34-1'
+    
+        else :
+            pass
 
+    elif x['버스번호']=='46':
+        root=get_url(bj_suwon)
+        loNo1,loNo2,predic_time,route_id,plate_no,predic_time2,plate_no2=get_information(root)
+        a=bus_data(route_id,loNo1,loNo2,predic_time,plate_no,predic_time2,plate_no2)
+        bus_46data,bus_46_2data=a.data_46()
+        if bus_46data['차량번호']==x['차량번호']:
+            return bus_46data['도착예정시간'],'46'
+            
+        elif bus_46_2data['차량번호']==x['차량번호']:
+            return bus_46_2data['도착예정시간'],'46'
+    
+        else :
+            pass
 
 
     
